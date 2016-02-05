@@ -6,19 +6,20 @@ $content = "erorr page not found";
 $id = 1;
 $submenu = "";
 $pageid = 0;
+$contents = "";
  $page = isset($_GET['page'])? $_GET['page']: "home";
-	$chek = data($page,$link);
-					 function data($page,$link){
-					 	$stmt = $link->prepare("SELECT * FROM `pagecontent.` WHERE page=?");
-						$stmt->bind_param("s", $page);
-						$stmt->execute();
-						$stmt->bind_result($misc, $misc2,$usefull2,$misc4,$misc5,$usefull,$misc6);
-						$stmt->fetch();
-						$chek = $usefull;
-						$chek .= ".php";
-						return $chek;
-					}
-	$template = $chek;
+	//$chek = data($page,$link);
+					// function data($page,$link){
+					// 	$stmt = $link->prepare("SELECT * FROM `pagecontent.` WHERE page=?");
+					//	$stmt->bind_param("s", $page);
+					//	$stmt->execute();
+					//	$stmt->bind_result($misc, $misc2,$usefull2,$misc4,$misc5,$usefull,$misc6);
+					//	$stmt->fetch();
+					//	$chek = $usefull;
+					//	$chek .= ".php";
+					//	return $chek;
+					//}
+					//$template = $chek;
 	$query = "SELECT * FROM `pagecontent.` WHERE pagecontentid = 0 AND menuoption<>'' ORDER BY menuorder";
 	$result = $link->query($query);
 	$pagecontent = $result->fetch_all(MYSQLI_ASSOC);
@@ -65,23 +66,37 @@ $pageid = 0;
 	$submenus = null;
 	return $submenus;
 }
-
-
-	if(!($template == $chek)){
-		$template = $chek;
-		$template .= ".php";
+	if ($contents == "") {
+		$contents = "Error page not found";
+		$title = "Error page not found";
+		$menu = "";
+	}
+	if(isset($chek)){
+		if(!($template == $chek)){
+			$template = $chek;
+			$template .= ".php";
+		}
 	}
 	function getContent(){
 		return $GLOBALS['contents'];		
 	}
 	function getMenu(){
-		return $GLOBALS['menu'];		
+		return $GLOBALS['menu'];
 	}
 	function getTitle(){
 		return $GLOBALS['title'];	
 	}
 	$link->close();
 	require  "module.php";
-	require  "templates/$template";
+	if (isset($chek)) {
+		if ($chek != null){
+			require  "templates/$template";
+		}
+	}
+	else{
 
+
+
+		require "templates/template.php";
+	}
 ?>
