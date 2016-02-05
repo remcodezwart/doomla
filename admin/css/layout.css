@@ -1,0 +1,64 @@
+body{
+	background-color:#00FFCD;
+}
+table{
+	background-color:red;
+}
+table{
+	width:99%;
+	border:1px solid black;
+}
+.submit{
+	margin:0px;
+	width:100px;
+	display:inline-block;
+}
+.container{
+	width:500px;
+	margin:0px auto;
+}
+th,td{
+	border:1px solid black;
+	padding:10px;
+	margin:0px;
+	background-color:green;
+	vertical-align: top;
+}
+td{
+	padding-top:0px;
+	background-color:lime;
+}
+.center{
+	text-align:center;
+	width:40%;
+}
+.left{
+	width:8%;
+	text-align:left;
+}
+.right{
+	width:8%;
+	text-align:right;
+}
+input{
+	width:90%;
+}
+textarea{
+	height:200px;
+	width:90%;
+}
+.submitting{
+	display:inline-block;
+}
+.loginbackground{
+	background-color:white;
+}
+.login{
+	width:200px;
+}
+.confirm{
+	width:85px;
+}
+.marginUser{
+	margin-left:17px;
+}
