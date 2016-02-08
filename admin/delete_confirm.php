@@ -2,8 +2,10 @@
 	require('login_chek.php');
     $id = $_GET['id'] ;
 	$link = new mysqli('localhost','root','','doomla');
-	$query = "SELECT * FROM `pagecontent.` WHERE id=$id ";
-	$result = $link->query($query);
+	$stmt = $link->prepare("SELECT * FROM `pagecontent.` WHERE id=?");
+	$stmt->bind_param("s", $id);
+	$stmt->execute();
+	$result = $stmt->get_result();
 	$pagecontent = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>

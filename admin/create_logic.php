@@ -14,10 +14,10 @@
 	$pagragraphe .= $page .=$pagragrapheEnd;
 	$h1 .= $pagragraphe;
 	$option = $_POST['option'];
-
-	$stmt = $link->prepare("INSERT INTO `pagecontent.` (`page`,`content`,`menuoption`,`menuorder`,`template`)
-	VALUES(?,?,?,?,?)");
-	$stmt->bind_param("sssss", $headerPage,$h1,$option,$order,$template);
+	$under = $_POST['under'];
+	$stmt = $link->prepare("INSERT INTO `pagecontent.` (`page`,`content`,`menuoption`,`menuorder`,`template`,`pagecontentid`)
+	VALUES(?,?,?,?,?,?)");
+	$stmt->bind_param("ssssss", $headerPage,$h1,$option,$order,$template,$under);
 	$stmt->execute();
 	header('Location: index.php');
 ?>

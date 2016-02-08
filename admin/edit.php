@@ -2,11 +2,13 @@
 	require('login_chek.php');
 	$id = $_GET['id'];
 	$link = new mysqli('localhost','root','','doomla');
-	$query = "SELECT * FROM `pagecontent.` WHERE id=$id";
-	$result = $link->query($query);
+	$stmt = $link->prepare("SELECT * FROM `pagecontent.` WHERE id=?");
+	$stmt->bind_param("s", $id);
+	$stmt->execute();
+	$result = $stmt->get_result();
 	$pagecontent = $result->fetch_all(MYSQLI_ASSOC);
 ?>
-<!DOCTYEPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>doomla pagina wijzigen</title>
@@ -26,6 +28,26 @@
 			<input value="<?php echo $content['menuoption'] ?>" type="text" name="option"></input>
 			<label>Volgorden</label>
 			<input type="number" value=<?php echo $content['menuorder'] ?> name="order"></input>
+			<br>
+			<label>onder</label>
+			 <select name="under">
+			 <?php
+			    $query = "SELECT * FROM `pagecontent.` WHERE pagecontentid = 0 AND menuoption<>''";
+				$result = $link->query($query);
+				$under = $result->fetch_all(MYSQLI_ASSOC);
+				?>
+						<option value="0">Niets</option>
+					<?php 
+					foreach($under as $option){
+						if($option['id'] != $id){
+							?>	
+  						<option value="<?php echo $option['id']?>"><?php echo $option['menuoption']?></option>
+  				<?php
+  						}
+					}
+  				?>
+			</select> 
+			<br>
 			<label>template:(optioneel)</label>
 			<input value="template" type="text" name="template"></input>
 			<label>Inhoud:</label>

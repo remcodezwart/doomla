@@ -19,6 +19,25 @@
 			<input type="text" name="option"></input>
 			<label>Volgorden</label>
 			<input type="number" name="order"></input>
+			<br>
+			<label>onder</label>
+			 <select name="under">
+			 <?php
+			    $query = "SELECT * FROM `pagecontent.` WHERE pagecontentid = 0 AND menuoption<>''";
+				$result = $link->query($query);
+				$under = $result->fetch_all(MYSQLI_ASSOC);
+				?>
+						<option value="0">Niets</option>
+					<?php 
+					foreach($under as $option){
+						?>
+  						<option value="<?php echo $option['id']?>"><?php echo $option['menuoption']?></option>
+  				<?php
+					}
+  				?>
+			</select> 
+			<br>
+
 			<label>template:(optioneel)</label>
 			<input value="template" type="text" name="template"></input>
 			<label>Inhoud:</label>
