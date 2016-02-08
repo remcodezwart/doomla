@@ -58,10 +58,7 @@ aside{
 	border:1px solid white;
 	outline:1px dashed black;
 	background-color:green;
-	position:absolute;
-	top:90%;
-	left:35%;
-	width:400px;
+	width:100%;
 	height:100px;
 }
 @media screen and (min-width: 750px) {

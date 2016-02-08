@@ -16,13 +16,13 @@
 			</nav>
 		</section>
 		</header>
+			<article>
+			  <?php echo getContent();?>
+			</article>
 			<aside>
 			<?php echo getModule('contact') 
 			?>
 			</aside>
-			<article>
-			  <?php echo getContent();?>
-			</article>
 		<footer>
 		@ Remco de Zwart 2016
 		</footer>
