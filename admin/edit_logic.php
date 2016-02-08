@@ -7,7 +7,8 @@
 	$menu = $_POST['option'];
 	$order = $_POST['order'];
 	$template = $_POST['template'];
-	$sql = "UPDATE `pagecontent.` SET page='$page',content='$content',menuoption='$menu',menuorder='$order',template='$template' WHERE id='$id'" ;
-	mysqli_query($link, $sql);
+	$stmt = $link->prepare("UPDATE `pagecontent.` SET page=?,content=?,menuoption=?,menuorder=?,template=? WHERE id=?") ;
+	$stmt->bind_param("ssssss", $page,$content,$menu,$order,$template,$id);
+	$stmt->execute();
 	header('Location: index.php');
 ?>

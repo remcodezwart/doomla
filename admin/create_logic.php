@@ -17,7 +17,7 @@
 
 	$stmt = $link->prepare("INSERT INTO `pagecontent.` (`page`,`content`,`menuoption`,`menuorder`,`template`)
 	VALUES(?,?,?,?,?)");
-	$stmt->bind_param("sssss", $headerPage,$option,$h1,$order,$template);
+	$stmt->bind_param("sssss", $headerPage,$h1,$option,$order,$template);
 	$stmt->execute();
-	//header('Location: index.php');
+	header('Location: index.php');
 ?>

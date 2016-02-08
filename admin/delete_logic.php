@@ -2,7 +2,8 @@
 	$link = new mysqli('localhost','root','','doomla');
 	$id = "";
 	$id = $_POST['id'];
-	$sql = "DELETE FROM `pagecontent.` WHERE id=$id";
-	mysqli_query($link, $sql);
+	$stmt = $link->prepare("DELETE FROM `pagecontent.` WHERE id=?");
+	$stmt->bind_param("s", $id);
+	$stmt->execute();
 	header('Location: index.php');
 ?>

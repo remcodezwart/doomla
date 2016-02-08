@@ -5,10 +5,13 @@
 	function getModule($page){
 		$subMenu = "";
 		$link = new mysqli('localhost','root','','doomla');
-		$query = "SELECT * FROM `pagecontent.` WHERE page='$page'";
-		$result = $link->query($query);
-		$Menu = $result->fetch_all(MYSQLI_ASSOC);
+		$stmt = $link->prepare("SELECT * FROM `pagecontent.` WHERE page=?");
+		$stmt->bind_param("s", $page);
+		$stmt->execute();
 		
+		$result = $stmt->get_result();
+		$Menu = $result->fetch_all(MYSQLI_ASSOC);
+
 		foreach($Menu as $content){
 			$subMenu = $content['content'];
 		}
