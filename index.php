@@ -8,18 +8,6 @@ $submenu = "";
 $pageid = 0;
 $contents = "";
  $page = isset($_GET['page'])? $_GET['page']: "home";
-	//$chek = data($page,$link);
-					// function data($page,$link){
-					// 	$stmt = $link->prepare("SELECT * FROM `pagecontent.` WHERE page=?");
-					//	$stmt->bind_param("s", $page);
-					//	$stmt->execute();
-					//	$stmt->bind_result($misc, $misc2,$usefull2,$misc4,$misc5,$usefull,$misc6);
-					//	$stmt->fetch();
-					//	$chek = $usefull;
-					//	$chek .= ".php";
-					//	return $chek;
-					//}
-					//$template = $chek;
 	$query = "SELECT * FROM `pagecontent.` WHERE pagecontentid = 0 AND menuoption<>'' ORDER BY menuorder";
 	$result = $link->query($query);
 	$pagecontent = $result->fetch_all(MYSQLI_ASSOC);
@@ -39,10 +27,10 @@ $contents = "";
 				if ($submenus != null) {
 					$menu .= "<ul class=\"submenu\">";	
 						foreach ($submenus as $submenu) {
-							if($page == $content['page']){
-								$content = $content['content'];
-								$title = $content['page'];
-								$chek = $content['template'];
+							if($page == $submenu['page']){
+								$contents = $submenu['content'];
+								$title = $submenu['page'];
+								$chek = $submenu['template'];
 								$menu .= "\n<li class=\"active\"><a href=\"?page=$submenu[page]\">$submenu[menuoption]</a></li>";
 							}
 							else{
@@ -54,18 +42,15 @@ $contents = "";
 				}
 					$menu .= "</li>";
 			}
-				$menu .= "</ul>";
-				
+				$menu .= "</ul>";		
 	function getSubmenu ($link ,$id) {
-	$query = "SELECT * FROM `pagecontent.` WHERE pagecontentid = $id";
-	$result = $link->query($query);
-	if ($result->num_rows > 0) {
+		$stmt = $link->prepare("SELECT * FROM `pagecontent.` WHERE pagecontentid = ?");
+		$stmt->bind_param("s", $id);
+		$stmt->execute();
+		$result = $stmt->get_result();
 		$submenus = $result->fetch_all(MYSQLI_ASSOC);
 		return $submenus;
 	}
-	$submenus = null;
-	return $submenus;
-}
 	if ($contents == "") {
 		$contents = "Error page not found";
 		$title = "Error page not found";
@@ -94,9 +79,6 @@ $contents = "";
 		}
 	}
 	else{
-
-
-
 		require "templates/template.php";
 	}
 ?>

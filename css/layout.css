@@ -15,6 +15,7 @@ ul li{
 	font-size:20px;
 }
 ul li a{
+	vertical-align:top;
 	text-decoration:none;
 	color:black;
 }

@@ -32,7 +32,7 @@
 				<td><?php echo $content['menuoption']?></td>
 				<td><?php echo $content['menuorder']?></td>
 				<td><?php echo $content['template']?></td>
-				<td><a href="delete.php?id=<?php echo $content['id']?>">Verwijderen</td>
+				<td><a href="delete_confirm.php?id=<?php echo $content['id']?>">Verwijderen</td>
 				<td><a href="edit.php?id=<?php echo $content['id']?>">Bewerk</td>
 			<?php 
 				}

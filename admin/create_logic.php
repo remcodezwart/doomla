@@ -14,8 +14,10 @@
 	$pagragraphe .= $page .=$pagragrapheEnd;
 	$h1 .= $pagragraphe;
 	$option = $_POST['option'];
-	$sql = "INSERT INTO `pagecontent.` (`page`,`content`,`menuoption`,`menuorder`,`template`)
-	VALUES('$headerPage','$h1','$option','$order','$template')";
-	mysqli_query($link, $sql);
-	header('Location: index.php');
+
+	$stmt = $link->prepare("INSERT INTO `pagecontent.` (`page`,`content`,`menuoption`,`menuorder`,`template`)
+	VALUES(?,?,?,?,?)");
+	$stmt->bind_param("sssss", $headerPage,$option,$h1,$order,$template);
+	$stmt->execute();
+	//header('Location: index.php');
 ?>
